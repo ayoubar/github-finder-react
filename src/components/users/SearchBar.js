@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SearchBar() {
+function SearchBar(props) {
   const [searchValue, setSearchValue] = useState('');
   const [alert, setAlert] = useState({
     message: null,
@@ -8,11 +8,13 @@ function SearchBar() {
   });
 
   // envoyer le formulaire
+  // todo: https://api.github.com/search/users?q=ayoub
   function handleSubmit(e) {
     e.preventDefault();
     if (searchValue === '') {
       setAlert({ message: 'Error', class: 'danger' });
     } else {
+      props.searchUsers(searchValue);
       setAlert({ message: 'Congats!', class: 'success' });
     }
   }
@@ -43,7 +45,7 @@ function SearchBar() {
           value={searchValue}
         />
         <button type="submit" className="btn btn-primary btn-block mt-3">
-          Search
+          {`${'Search'}`}
         </button>
       </form>
     </>

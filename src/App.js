@@ -3,10 +3,17 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/layouts/NavBar';
 import SearchBar from './components/users/SearchBar';
 
+import Users from './components/users/Users';
+
 function About() {
+  const [
+    content,
+    setContent,
+  ] = useState(`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi soluta quisquam facere placeat reiciendis consectetur perspiciatis odit pariatur, rem doloribus
+  `);
   return (
     <div>
-      <h1> this is About Page</h1>
+      <h1> {content}</h1>
     </div>
   );
 }
@@ -31,6 +38,17 @@ function App() {
     { name: 'Contact', path: '/contact' },
   ]);
 
+  const [users, setUsers] = useState([]);
+
+  // todo: search for users fucntion
+  async function searchUsers(nom_utilisateur) {
+    console.log(nom_utilisateur);
+    const reponse = await fetch(
+      `https://api.github.com/search/users?q=${nom_utilisateur}`
+    );
+    const data = await reponse.json();
+    setUsers(data.items);
+  }
   return (
     <Router>
       <NavBar
@@ -40,7 +58,8 @@ function App() {
       />
       <Switch>
         <Route exact path="/">
-          <SearchBar />
+          <SearchBar searchUsers={searchUsers} />
+          <Users users={users} />
         </Route>
         <Route exact path="/about">
           <About />
