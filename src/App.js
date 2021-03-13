@@ -49,6 +49,7 @@ function App() {
     const data = await reponse.json();
     setUsers(data.items);
   }
+
   return (
     <Router>
       <NavBar
