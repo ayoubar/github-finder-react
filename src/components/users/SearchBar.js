@@ -23,6 +23,11 @@ function SearchBar(props) {
     setSearchValue(e.target.value);
   }
 
+  function clear() {
+    console.log('clear');
+    props.clearUsers();
+  }
+
   return (
     <>
       {alert.message && (
@@ -48,6 +53,13 @@ function SearchBar(props) {
           {`${'Search'}`}
         </button>
       </form>
+      {props.lengthUser > 0 && (
+        <div className="container">
+          <button className="btn btn-light btn-block mt-3 " onClick={clear}>
+            clear
+          </button>
+        </div>
+      )}
     </>
   );
 }

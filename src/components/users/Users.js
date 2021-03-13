@@ -1,5 +1,4 @@
-import React from 'react';
-
+import { Link } from 'react-router-dom';
 function Users(props) {
   console.log(" c'est le composant Users", props);
   return (
@@ -10,14 +9,11 @@ function Users(props) {
             <div class="card">
               <img src={x.avatar_url} class="card-img-top" alt="..." />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#!" class="btn btn-primary">
-                  Button
-                </a>
+                <h5 class="card-title">{x.login}</h5>
+
+                <Link to={`/user/${x.login}`} class="btn btn-primary">
+                  profile
+                </Link>
               </div>
             </div>
           </div>
